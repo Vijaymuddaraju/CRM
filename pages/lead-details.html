@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Details — CRM</title>
+<script>(function(){try{var t=localStorage.getItem('crm_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<script>window.PAGE = { key: "leads", title: "Lead Details", breadcrumb: ["Leads"] };</script>
+
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-area">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="page-content" id="pageContent">
+      <div class="page-header">
+        <div>
+          <div class="topbar-breadcrumb mb-1"><a href="leads.html" class="text-muted">Leads</a><span>/</span><span id="breadcrumbLeadName">Lead</span></div>
+          <h1 id="leadTitleName">Lead</h1>
+          <p id="leadTitleSub"></p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-secondary" id="editLeadBtn" data-icon="edit">Edit</button>
+          <button class="btn btn-secondary" id="followupLeadBtn" data-icon="followups">Add Follow-up</button>
+          <button class="btn btn-secondary" id="quoteLeadBtn" data-icon="quotations">Create Quotation</button>
+          <button class="btn btn-primary" id="convertBtn" data-icon="checkCircle">Convert Lead</button>
+          <div class="dropdown">
+            <button class="btn btn-icon btn-secondary" id="moreActionsBtn" data-icon="more"></button>
+            <div class="dropdown-panel dropdown-menu" id="moreActionsPanel" style="right:0;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3 mb-4">
+        <div class="panel" id="leadInfoCard"></div>
+        <div class="panel" id="contactInfoCard"></div>
+        <div class="panel" id="salesInfoCard"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body" style="padding-bottom:0;">
+          <div class="tabs">
+            <div class="tab-btn active" data-tab="followupsTabPanel">Follow-ups</div>
+            <div class="tab-btn" data-tab="activityTabPanel">Activity</div>
+            <div class="tab-btn" data-tab="notesTabPanel">Notes</div>
+            <div class="tab-btn" data-tab="quotationsTabPanel">Quotations</div>
+            <div class="tab-btn" data-tab="invoicesTabPanel">Invoices</div>
+            <div class="tab-btn" data-tab="paymentsTabPanel">Payments</div>
+            <div class="tab-btn" data-tab="documentsTabPanel">Documents</div>
+          </div>
+        </div>
+        <div class="panel-body" style="padding-top:0;">
+          <div class="tab-panel active" id="followupsTabPanel"><div id="followupTimeline"></div></div>
+          <div class="tab-panel" id="activityTabPanel"><div id="activityTimeline"></div></div>
+          <div class="tab-panel" id="notesTabPanel"><div id="notesTab"></div></div>
+          <div class="tab-panel" id="quotationsTabPanel"><div id="quotationsTab"></div></div>
+          <div class="tab-panel" id="invoicesTabPanel"><div id="invoicesTab"></div></div>
+          <div class="tab-panel" id="paymentsTabPanel"><div id="paymentsTab"></div></div>
+          <div class="tab-panel" id="documentsTabPanel">
+            <div class="upload-box" data-icon="paperclip">
+              <div class="upload-title">Drag & drop files here, or click to browse</div>
+              <div class="upload-sub">Document uploads are simulated in this prototype.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/icons.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/shared-modals.js"></script>
+<script src="../js/lead-details.js"></script>
+</body>
+</html>
