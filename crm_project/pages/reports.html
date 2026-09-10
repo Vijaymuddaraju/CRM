@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profit & Reports — CRM</title>
+<script>(function(){try{var t=localStorage.getItem('crm_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<script>window.PAGE = { key: "reports", title: "Profit & Reports", breadcrumb: ["Finance"] };</script>
+
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-area">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="page-content" id="pageContent">
+      <div class="page-header">
+        <div><h1>Profit & Reports</h1><p>Financial performance across income, expenses and profit.</p></div>
+        <div class="page-header-actions">
+          <select class="select-field" id="reportMonthFrom"></select>
+          <select class="select-field" id="reportMonthTo"></select>
+          <button class="btn btn-secondary" id="resetReportFilterBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="reportKpis"></div>
+
+      <div class="dash-grid-2">
+        <div class="panel">
+          <div class="panel-header"><h3>Income vs Expenses</h3></div>
+          <div class="panel-body" id="incomeExpenseChart"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h3>Monthly Profit</h3></div>
+          <div class="panel-body" id="monthlyProfitChart"></div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-toolbar"><h3 class="section-title">Monthly Breakdown</h3></div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead><tr><th>Month</th><th>Income</th><th>Expenses</th><th>Net Profit</th><th>Margin</th></tr></thead>
+            <tbody id="reportBreakdownBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/icons.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/reports.js"></script>
+</body>
+</html>

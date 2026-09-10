@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM</title>
+<script>
+  (function () {
+    try {
+      var raw = localStorage.getItem("crm_session_v1") || sessionStorage.getItem("crm_session_v1");
+      if (raw) {
+        var session = JSON.parse(raw);
+        window.location.replace(session.role === "admin" ? "pages/admin-dashboard.html" : "pages/sales-dashboard.html");
+        return;
+      }
+    } catch (e) {}
+    window.location.replace("pages/login.html");
+  })();
+</script>
+</head>
+<body></body>
+</html>

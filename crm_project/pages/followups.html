@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow-ups — CRM</title>
+<script>(function(){try{var t=localStorage.getItem('crm_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<script>window.PAGE = { key: "followups", title: "Follow-ups", breadcrumb: ["Main"] };</script>
+
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-area">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="page-content" id="pageContent">
+      <div class="page-header">
+        <div>
+          <h1>Follow-ups</h1>
+          <p id="pageSubText">Track and manage every scheduled follow-up.</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-primary" id="addFollowupBtn" data-icon="plus">Add Follow-up</button>
+        </div>
+      </div>
+
+      <div class="pill-tabs">
+        <div class="pill-tab followup-tab active" data-tab="today">Today's <span class="badge badge-primary" id="tabCount_today"></span></div>
+        <div class="pill-tab followup-tab" data-tab="upcoming">Upcoming <span class="badge badge-info" id="tabCount_upcoming"></span></div>
+        <div class="pill-tab followup-tab" data-tab="overdue">Overdue <span class="badge badge-danger" id="tabCount_overdue"></span></div>
+        <div class="pill-tab followup-tab" data-tab="completed">Completed <span class="badge badge-success" id="tabCount_completed"></span></div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-box" data-icon="search"><input type="text" id="followupSearchInput" placeholder="Search by lead, type or notes..."></div>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead><tr><th>Lead</th><th>Salesperson</th><th>Follow-up Type</th><th>Date</th><th>Time</th><th>Notes</th><th>Status</th><th class="cell-actions">Action</th></tr></thead>
+            <tbody id="followupsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-bar">
+          <span class="text-faint fs-sm" id="followupsCount"></span>
+          <div class="pagination" id="followupsPagination"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/icons.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/shared-modals.js"></script>
+<script src="../js/followups.js"></script>
+</body>
+</html>
