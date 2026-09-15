@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Tax Invoice document editor + printable A4 preview
+   Modeled on the same "live document" approach as purchase-order.css —
+   maroon/blue GST tax-invoice look with black grid lines.
+   ========================================================================== */
+
+.inv-meta-bar { display: flex; gap: var(--sp-5); flex-wrap: wrap; align-items: flex-end; margin-bottom: var(--sp-5); padding-bottom: var(--sp-4); border-bottom: 1px dashed var(--border-strong); }
+.inv-meta-bar .field { margin-bottom: 0; min-width: 180px; }
+.inv-tax-mode-row { display: flex; gap: var(--sp-4); flex-wrap: wrap; padding-bottom: 4px; }
+.inv-tax-mode-row label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; white-space: nowrap; }
+
+/* ---------- Printable document ----------
+   Colors matched field-by-field against the reference Tax Invoice: maroon
+   for the brand name / section titles / interest & jurisdiction notes, blue
+   for address lines / party details / bank values, purple for the goods
+   note, red for Amount in Words, green for the Terms & Condition value —
+   everything else (title, tables, labels) is plain black. */
+.inv-doc {
+  --inv-maroon: #8b1a2b;
+  --inv-blue: #1a4fa0;
+  --inv-purple: #6a2c91;
+  --inv-red: #cc0000;
+  --inv-green: #1b7a3d;
+  --inv-line: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px; color: #111; background: #fff;
+  padding: 14px; border: 1.5px solid var(--inv-line); border-radius: 4px;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.inv-doc-brand { text-align: center; margin-bottom: 4px; }
+.inv-doc-company-name { font-size: 24px; font-weight: 800; color: var(--inv-maroon); font-style: italic; }
+.inv-doc-iso { font-size: 10px; color: #555; letter-spacing: 0.05em; margin-top: -2px; }
+.inv-doc-addrline { text-align: center; color: var(--inv-blue); font-weight: 700; font-size: 12px; }
+.inv-doc-addrline2 { text-align: center; color: var(--inv-blue); font-weight: 700; font-size: 12px; margin-bottom: 8px; }
+
+.inv-doc-title-row { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--inv-line); border-bottom: none; padding: 8px 14px; }
+.inv-doc-title { font-size: 26px; font-weight: 800; color: #111; }
+.inv-doc-copytype select { border: 1px solid var(--inv-line); font-size: 12px; font-weight: 700; padding: 4px 8px; color: #111; }
+
+.inv-doc-meta-row { display: flex; gap: 0; margin-bottom: 8px; }
+.inv-doc-meta-table { width: 50%; border-collapse: collapse; }
+.inv-doc-meta-table td { border: 1px solid var(--inv-line); padding: 5px 8px; color: #111; }
+.inv-doc-meta-table td:first-child { font-weight: 700; width: 42%; background: #f7f7f7; }
+
+.inv-doc-parties { display: flex; border: 1px solid var(--inv-line); border-top: none; margin-bottom: 8px; }
+.inv-doc-party { flex: 1; padding: 8px 10px; border-left: 1px solid var(--inv-line); color: var(--inv-blue); font-weight: 700; }
+.inv-doc-party:first-child { border-left: none; }
+.inv-doc-party-title { font-weight: 800; color: var(--inv-maroon); font-style: italic; margin-bottom: 4px; }
+.inv-doc-party:last-child { color: #111; font-weight: 400; }
+.inv-doc-party:last-child .inv-doc-party-title { color: #111; font-style: normal; }
+.inv-doc-party-accent { color: var(--inv-maroon); font-weight: 700; font-style: normal; }
+
+.inv-doc-items-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+.inv-doc-items-table th, .inv-doc-items-table td { border: 1px solid var(--inv-line); padding: 6px 8px; color: #111; }
+.inv-doc-items-table th { background: #f0f0f0; font-weight: 700; text-align: center; font-size: 11px; }
+.inv-doc-items-table td.num, .inv-doc-items-table th.num { text-align: right; white-space: nowrap; }
+.inv-doc-items-table td.desc { max-width: 280px; }
+
+.inv-doc-bottom-grid { display: flex; gap: 0; border: 1px solid var(--inv-line); margin-bottom: 8px; }
+.inv-doc-tax-table { flex: 1; border-collapse: collapse; }
+.inv-doc-tax-table td, .inv-doc-tax-table th { border: 1px solid var(--inv-line); padding: 5px 8px; text-align: center; font-size: 11px; color: #111; }
+.inv-doc-tax-table th { background: #f0f0f0; font-weight: 700; }
+.inv-doc-note { flex: 1.1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; color: var(--inv-purple); font-weight: 700; font-style: italic; border-left: 1px solid var(--inv-line); border-right: 1px solid var(--inv-line); }
+.inv-doc-summary-table { flex: 1; border-collapse: collapse; }
+.inv-doc-summary-table td { border: 1px solid var(--inv-line); padding: 5px 8px; color: #111; }
+.inv-doc-summary-table td:first-child { font-weight: 700; width: 55%; }
+.inv-doc-summary-table td:last-child { text-align: right; white-space: nowrap; font-weight: 700; }
+.inv-doc-summary-table tr.grand td { font-weight: 800; }
+
+.inv-doc-words { border: 1px solid var(--inv-line); border-top: none; padding: 6px 10px; margin-bottom: 8px; color: var(--inv-red); font-weight: 700; }
+
+.inv-doc-termscert { display: flex; border: 1px solid var(--inv-line); margin-bottom: 8px; }
+.inv-doc-terms { flex: 1.3; padding: 8px 10px; border-right: 1px solid var(--inv-line); color: var(--inv-green); font-weight: 700; font-style: italic; }
+.inv-doc-cert { flex: 1; padding: 8px 10px; font-size: 11px; font-style: italic; color: #111; }
+.inv-doc-terms-label { font-weight: 700; margin-bottom: 4px; color: var(--inv-red); font-style: normal; }
+.inv-doc-cert-label { font-weight: 700; margin-bottom: 4px; color: #111; }
+
+.inv-doc-bank-grid { display: flex; border: 1px solid var(--inv-line); }
+.inv-doc-bank-table { flex: 1.2; border-collapse: collapse; }
+.inv-doc-bank-table td { border: 1px solid var(--inv-line); padding: 4px 8px; font-size: 11px; }
+.inv-doc-bank-table td:first-child { font-weight: 700; width: 40%; background: #f7f7f7; color: #111; }
+.inv-doc-bank-table td:last-child { color: var(--inv-blue); font-weight: 700; }
+.inv-doc-interest { flex: 1; padding: 10px; font-size: 11px; font-style: italic; color: var(--inv-maroon); font-weight: 700; border-left: 1px solid var(--inv-line); border-right: 1px solid var(--inv-line); }
+.inv-doc-jurisdiction { font-weight: 800; text-align: center; margin-top: 8px; color: var(--inv-red); font-style: normal; }
+.inv-doc-sign { flex: 1; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; color: #111; font-weight: 700; }
+.inv-doc-sign-line { height: 44px; }
+.inv-doc-footer { font-size: 10px; font-style: italic; margin-top: 6px; color: #111; }
+
+/* ---------- Editable fields inside the live document editor ---------- */
+.inv-doc input, .inv-doc textarea, .inv-doc select {
+  border: none; background: transparent; font: inherit; color: inherit;
+  width: 100%; padding: 2px 4px; border-radius: 3px; resize: vertical;
+}
+.inv-doc input::placeholder, .inv-doc textarea::placeholder { color: #8a8a8a; font-style: italic; opacity: 1; }
+.inv-doc input:hover, .inv-doc textarea:hover, .inv-doc select:hover { background: rgba(122, 31, 43, 0.06); }
+.inv-doc input:focus, .inv-doc textarea:focus, .inv-doc select:focus { outline: 1.5px dashed var(--inv-maroon); background: #fff; }
+.inv-doc input[type="number"] { text-align: right; }
+.inv-doc-company-name { padding: 2px; }
+.inv-doc-items-table input { padding: 5px 4px; }
+.inv-doc-summary-table input[type="number"] { width: 50px; display: inline-block; margin: 0 2px; }
+.inv-doc-items-table .remove-row-btn { background: none; border: none; color: #444; opacity: 0.55; cursor: pointer; padding: 4px; }
+.inv-doc-items-table .remove-row-btn:hover { opacity: 1; color: #b91c1c; }
+.inv-doc-error { color: #b91c1c; font-size: 12px; font-weight: 600; margin: -4px 0 8px; }
+
+@media print {
+  body * { visibility: hidden; }
+  #invPreviewBody, #invPreviewBody * { visibility: visible; }
+  #invPreviewBody { position: absolute; top: 0; left: 0; width: 100%; padding: 0; }
+  .inv-doc { border-width: 1.5px; }
+}

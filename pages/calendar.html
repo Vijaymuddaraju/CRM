@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar — CRM</title>
+<script>(function(){try{var t=localStorage.getItem('crm_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<script>window.PAGE = { key: "calendar", title: "Calendar", breadcrumb: ["Main"] };</script>
+
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-area">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="page-content" id="pageContent">
+      <div class="page-header">
+        <div><h1>Calendar</h1><p>Follow-ups, meetings and reminders in one place.</p></div>
+        <div class="page-header-actions"><button class="btn btn-primary" id="addEventBtn" data-icon="plus">Add Event</button></div>
+      </div>
+
+      <div class="panel card-pad">
+        <div class="cal-toolbar">
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="calPrevBtn" data-icon="chevronLeft"></button>
+            <div class="cal-range-label" id="calRangeLabel"></div>
+            <button class="cal-nav-btn" id="calNextBtn" data-icon="chevronRight"></button>
+            <button class="btn btn-secondary btn-sm" id="calTodayBtn">Today</button>
+          </div>
+          <div class="cal-view-switch">
+            <div class="cal-view-btn active" data-view="month">Month</div>
+            <div class="cal-view-btn" data-view="week">Week</div>
+            <div class="cal-view-btn" data-view="day">Day</div>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <div id="calendarGrid" style="min-width:700px;"></div>
+        </div>
+        <div class="legend mt-4">
+          <div class="legend-item"><span class="legend-dot" style="background:#4f46e5"></span>Follow-up</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#0891b2"></span>Meeting</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span>Payment Reminder</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#6b7086"></span>Other</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/icons.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/shared-modals.js"></script>
+<script src="../js/calendar.js"></script>
+</body>
+</html>

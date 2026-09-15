@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — CRM</title>
+<script>(function(){try{var t=localStorage.getItem('crm_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<script>window.PAGE = { key: "profile", title: "Profile", breadcrumb: ["System"] };</script>
+
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-area">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="page-content" id="pageContent">
+      <div class="page-header"><div><h1>Profile</h1><p>Manage your personal information and preferences.</p></div></div>
+
+      <div class="panel card-pad mb-4">
+        <div class="flex items-center gap-4">
+          <div class="avatar avatar-lg" id="profileAvatar"></div>
+          <div>
+            <h3 id="profileNameHeading" style="font-size:18px;"></h3>
+            <p class="text-muted fs-sm" id="profileRoleHeading"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-4" style="align-items:start;">
+        <div class="panel">
+          <div class="panel-header"><h3>Personal Information</h3></div>
+          <div class="panel-body">
+            <div class="form-grid">
+              <div class="field"><label>Full Name</label><input class="input" id="profileName"></div>
+              <div class="field"><label>Email</label><input class="input" id="profileEmail" disabled></div>
+              <div class="field"><label>Phone</label><input class="input" id="profilePhone"></div>
+              <div class="field"><label>Role</label><input class="input" id="profileRole" disabled></div>
+            </div>
+            <button class="btn btn-primary btn-sm mt-2" id="saveProfileBtn"><span class="btn-label">Save Changes</span></button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><h3>Notification Preferences</h3></div>
+          <div class="panel-body">
+            <div class="switch-row"><div><div class="switch-row-label">Email Notifications</div><div class="switch-row-desc">Receive important updates via email.</div></div><label class="switch"><input type="checkbox" id="emailNotifToggle"><span class="slider"></span></label></div>
+            <div class="switch-row"><div><div class="switch-row-label">Follow-up Reminders</div><div class="switch-row-desc">Get notified before scheduled follow-ups.</div></div><label class="switch"><input type="checkbox" id="followupReminderToggle"><span class="slider"></span></label></div>
+            <div class="switch-row"><div><div class="switch-row-label">Payment Reminders</div><div class="switch-row-desc">Alerts for pending and overdue payments.</div></div><label class="switch"><input type="checkbox" id="paymentReminderToggle"><span class="slider"></span></label></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="max-width:600px;">
+        <div class="panel-header"><h3>Change Password</h3></div>
+        <div class="panel-body">
+          <div class="field" id="pwd_current"><label>Current Password</label><input class="input" type="password" id="currentPassword"><div class="error-msg">Current password is incorrect.</div></div>
+          <div class="field" id="pwd_new"><label>New Password</label><input class="input" type="password" id="newPassword"><div class="error-msg">Password must be at least 6 characters.</div></div>
+          <div class="field" id="pwd_confirm"><label>Confirm New Password</label><input class="input" type="password" id="confirmPassword"><div class="error-msg">Passwords do not match.</div></div>
+          <button class="btn btn-primary btn-sm" id="changePasswordBtn"><span class="btn-label">Change Password</span></button>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/icons.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/profile.js"></script>
+</body>
+</html>

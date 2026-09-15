@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Quotation documents — format picker + 3 live document editors
+   (Techno Commercial Offer: Simple / Detailed, and Standard Quotation)
+   Same "live document" approach as invoice.css/purchase-order.css.
+   ========================================================================== */
+
+/* ---------- Format picker (first step when clicking Create Quotation) ---------- */
+.qd-format-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sp-4); }
+.qd-format-card {
+  border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-5);
+  cursor: pointer; transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.qd-format-card:hover { border-color: var(--primary); background: var(--primary-soft); transform: translateY(-2px); }
+.qd-format-card-title { font-weight: 700; font-size: 14px; color: var(--text); }
+.qd-format-card-hint { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+.qd-meta-bar { display: flex; gap: var(--sp-5); flex-wrap: wrap; align-items: flex-end; margin-bottom: var(--sp-5); padding-bottom: var(--sp-4); border-bottom: 1px dashed var(--border-strong); }
+.qd-meta-bar .field { margin-bottom: 0; min-width: 180px; }
+
+/* ---------- Printable document base ----------
+   Each source document actually uses color differently, so the palette is
+   scoped per format (via .fmt-simple / .fmt-detailed / .fmt-standard on the
+   .qd-doc root) rather than one scheme reused everywhere:
+   - All three: blue company letterhead, black body/tables/borders.
+   - Simple (Harmonics offer): otherwise entirely black — no colored terms.
+   - Detailed (Biocon offer): green italic tagline under the logo, numbered
+     Terms & Conditions in rust/brown, blue Bank Details values.
+   - Standard (Dynamatic quotation): plainest of the three — black title
+     bar with a light band, black terms, no special accent colors. */
+.qd-doc {
+  --qd-maroon: #8b1a2b;
+  --qd-blue: #1a4fa0;
+  --qd-green: #1f7a3d;
+  --qd-rust: #a0522d;
+  --qd-line: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px; color: #111; background: #fff;
+  padding: 14px; border: 1.5px solid var(--qd-line); border-radius: 4px;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.qd-doc-header { text-align: center; border-bottom: 2px solid var(--qd-rust); padding-bottom: 8px; margin-bottom: 10px; }
+.qd-doc-company-name { font-size: 22px; font-weight: 800; color: var(--qd-blue); font-style: normal; }
+.qd-doc-header-line { color: var(--qd-blue); font-weight: 700; font-size: 11.5px; }
+.qd-doc-tagline { color: var(--qd-green); font-style: italic; font-weight: 700; font-size: 11px; }
+
+.qd-doc.fmt-standard .qd-doc-header { border-bottom-color: var(--qd-line); }
+.qd-doc.fmt-standard .qd-doc-header-line { color: #111; }
+
+.qd-doc-title-bar { text-align: center; font-size: 16px; font-weight: 800; letter-spacing: 0.04em; color: #111; border: 1px solid var(--qd-line); padding: 6px; margin-bottom: 10px; text-decoration: underline; background: transparent; }
+.qd-doc.fmt-standard .qd-doc-title-bar { background: #eef2fa; text-decoration: none; }
+
+.qd-doc-refdate { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 10px; }
+
+.qd-doc-recipient { margin-bottom: 10px; }
+.qd-doc-recipient .fw-700 { font-weight: 700; }
+.qd-doc-subject { font-weight: 700; margin-bottom: 10px; }
+.qd-doc-subject .qd-label { text-decoration: underline; }
+
+.qd-doc-intro { margin-bottom: 10px; }
+
+.qd-doc-section-title { font-weight: 700; text-decoration: underline; margin: 10px 0 6px; }
+
+.qd-bullet-list { margin: 0 0 10px; padding: 0; list-style: none; }
+.qd-bullet-list li { display: flex; gap: 6px; margin-bottom: 4px; }
+.qd-bullet-list li::before { content: "•"; flex-shrink: 0; }
+.qd-bullet-list.numbered { counter-reset: qd-counter; }
+.qd-bullet-list.numbered li::before { counter-increment: qd-counter; content: counter(qd-counter) "."; font-weight: 700; }
+
+.qd-doc-items-table { width: 100%; border-collapse: collapse; margin-bottom: 4px; }
+.qd-doc-items-table th, .qd-doc-items-table td { border: 1px solid var(--qd-line); padding: 6px 8px; }
+.qd-doc-items-table th { background: #f0f0f0; font-weight: 700; text-align: center; font-size: 11px; }
+.qd-doc-items-table td.num, .qd-doc-items-table th.num { text-align: right; white-space: nowrap; }
+.qd-doc-items-table td.desc { max-width: 320px; }
+.qd-doc-items-table tr.total-row td { font-weight: 800; text-align: right; }
+.qd-doc-items-table tr.total-row td:first-child { text-align: left; }
+
+.qd-doc-group-title { font-weight: 800; text-align: center; background: #f0f0f0; border: 1px solid var(--qd-line); border-bottom: none; padding: 5px; }
+
+.qd-doc-words { border: 1px solid var(--qd-line); padding: 8px 10px; margin-bottom: 10px; color: #111; font-weight: 800; text-align: center; }
+
+/* Numbered Terms & Conditions are colored (rust) only in the Detailed
+   format — Simple and Standard keep them plain black, matching their
+   respective source documents. */
+.qd-doc-terms-value { color: #111; font-weight: 700; }
+.qd-doc.fmt-detailed .qd-doc-section-title + .qd-bullet-list.numbered { color: var(--qd-rust); font-weight: 700; }
+
+.qd-doc-bank-table { width: 60%; border-collapse: collapse; margin: 6px 0 10px; }
+.qd-doc-bank-table td { border: 1px solid var(--qd-line); padding: 4px 8px; font-size: 11px; }
+.qd-doc-bank-table td:first-child { font-weight: 700; width: 40%; background: #f7f7f7; }
+.qd-doc-bank-table td:last-child { color: var(--qd-blue); font-weight: 700; }
+
+.qd-doc-sign { margin-top: 20px; }
+.qd-doc-sign-line { height: 44px; }
+
+/* ---------- Editable fields inside the live document editor ---------- */
+.qd-doc input, .qd-doc textarea, .qd-doc select {
+  border: none; background: transparent; font: inherit; color: inherit;
+  width: 100%; padding: 2px 4px; border-radius: 3px; resize: vertical;
+}
+.qd-doc input::placeholder, .qd-doc textarea::placeholder { color: #8a8a8a; font-style: italic; opacity: 1; }
+.qd-doc input:hover, .qd-doc textarea:hover, .qd-doc select:hover { background: rgba(139, 26, 43, 0.06); }
+.qd-doc input:focus, .qd-doc textarea:focus, .qd-doc select:focus { outline: 1.5px dashed var(--qd-maroon); background: #fff; }
+.qd-doc input[type="number"] { text-align: right; }
+.qd-doc-company-name { padding: 2px; text-align: center; }
+.qd-doc-items-table input { padding: 5px 4px; }
+.qd-doc-error { color: #b91c1c; font-size: 12px; font-weight: 600; margin: -4px 0 8px; }
+
+.qd-bullet-row { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px; }
+.qd-bullet-row textarea { border: 1px solid var(--border); background: var(--surface); border-radius: 6px; padding: 8px 10px; font-size: 13px; color: var(--text); }
+.qd-bullet-row textarea:focus { outline: none; border-color: var(--primary); }
+.qd-bullet-row .remove-row-btn { background: none; border: none; color: var(--text-faint); cursor: pointer; padding: 6px; flex-shrink: 0; }
+.qd-bullet-row .remove-row-btn:hover { color: var(--danger); }
+
+.qd-doc .remove-row-btn { background: none; border: none; color: #444; opacity: 0.55; cursor: pointer; padding: 4px; }
+.qd-doc .remove-row-btn:hover { opacity: 1; color: #b91c1c; }
+
+@media print {
+  body * { visibility: hidden; }
+  #quotePreviewBody, #quotePreviewBody * { visibility: visible; }
+  #quotePreviewBody { position: absolute; top: 0; left: 0; width: 100%; padding: 0; }
+  .qd-doc { border-width: 1.5px; }
+}

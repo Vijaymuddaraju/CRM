@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Purchase Order document editor + printable A4 preview
+   ========================================================================== */
+
+.po-section-title { font-size: 13px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.03em; margin: var(--sp-5) 0 var(--sp-3); }
+.po-section-title:first-child { margin-top: 0; }
+
+/* Workflow bar above the document — status/expected date/tax mode are CRM
+   metadata, not part of the printed PO, so they're deliberately styled as
+   normal app UI (not document text) to signal that distinction. */
+.po-meta-bar { display: flex; gap: var(--sp-5); flex-wrap: wrap; align-items: flex-end; margin-bottom: var(--sp-5); padding-bottom: var(--sp-4); border-bottom: 1px dashed var(--border-strong); }
+.po-meta-bar .field { margin-bottom: 0; min-width: 180px; }
+
+.po-tax-mode-row { display: flex; gap: var(--sp-4); flex-wrap: wrap; padding-bottom: 4px; }
+.po-tax-mode-row label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; white-space: nowrap; }
+
+/* ---------- Printable document preview ----------
+   A bordered "document sheet" in the same spirit as a classic business
+   Purchase Order: navy header/labels, tan section bars, crisp grid lines.
+   Colors are hardcoded (not CRM theme tokens) since this must print/export
+   identically regardless of the app's light/dark theme. */
+.po-doc {
+  --po-navy: #1f3864;
+  --po-tan: #efe4cf;
+  --po-tan-strong: #e3d2a6;
+  --po-line: #2b2b2b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12.5px; color: #1a1a1a; background: #fff;
+  padding: 16px; border: 2px solid var(--po-navy); border-radius: 4px;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.po-doc-company-name { font-size: 22px; font-weight: 800; color: var(--po-navy); text-align: center; border: 2px solid var(--po-navy); padding: 10px; margin-bottom: 10px; }
+.po-doc-title-row { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.po-doc-address-box { flex: 1; border: 1px solid var(--po-line); padding: 10px; }
+.po-doc-meta-box { width: 260px; border: 1px solid var(--po-line); }
+.po-doc-meta-row { display: flex; justify-content: space-between; gap: 8px; padding: 6px 10px; border-top: 1px solid var(--po-line); font-weight: 700; color: var(--po-navy); }
+.po-doc-meta-row:first-child { border-top: none; }
+.po-doc-title-badge { text-align: center; font-weight: 800; font-size: 15px; color: var(--po-navy); background: var(--po-tan); padding: 8px 6px; border-bottom: 2px solid var(--po-navy); letter-spacing: 0.05em; }
+
+.po-doc-info-table, .po-doc-items-table, .po-doc-terms-table, .po-doc-totals-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+.po-doc-info-table td, .po-doc-info-table th { border: 1px solid var(--po-line); padding: 6px 10px; vertical-align: top; }
+.po-doc-info-table th { background: var(--po-tan); color: var(--po-navy); text-align: left; font-weight: 700; }
+
+.po-doc-greeting { margin: 12px 0; }
+.po-doc-greeting p { margin: 0 0 6px; }
+
+.po-doc-items-table th, .po-doc-items-table td { border: 1px solid var(--po-line); padding: 7px 10px; }
+.po-doc-items-table th { background: var(--po-tan); color: var(--po-navy); font-weight: 700; text-align: left; }
+.po-doc-items-table td.num, .po-doc-items-table th.num { text-align: right; white-space: nowrap; }
+.po-doc-items-table td.desc { max-width: 320px; }
+
+.po-doc-bottom-grid { display: flex; gap: 10px; align-items: flex-start; }
+.po-doc-terms-table { flex: 1.3; }
+.po-doc-terms-table td, .po-doc-terms-table th { border: 1px solid var(--po-line); padding: 6px 10px; }
+.po-doc-terms-table th { background: var(--po-tan); color: var(--po-navy); text-align: left; }
+.po-doc-terms-table td:first-child { font-weight: 700; width: 40%; }
+
+.po-doc-totals-table { flex: 1; }
+.po-doc-totals-table td { border: 1px solid var(--po-line); padding: 6px 10px; }
+.po-doc-totals-table td:first-child { font-weight: 700; }
+.po-doc-totals-table td:last-child { text-align: right; white-space: nowrap; }
+.po-doc-totals-table tr.grand td { font-weight: 800; background: var(--po-navy); color: #fff; }
+
+.po-doc-words { border: 1px solid var(--po-navy); background: var(--po-tan); color: var(--po-navy); padding: 8px 10px; margin: 10px 0; font-weight: 700; }
+
+.po-doc-auth { margin-top: 30px; display: flex; justify-content: flex-end; }
+.po-doc-auth-box { text-align: center; width: 220px; }
+.po-doc-sig-line { height: 50px; border-bottom: 1px solid var(--po-line); margin-bottom: 6px; }
+.po-doc-auth-box input { text-align: center; font-weight: 700; margin-bottom: 2px; }
+
+/* ---------- Editable fields inside the live document editor ----------
+   Inputs/textareas blend into the surrounding document text until the user
+   interacts with them, so the editor reads as "the document itself", not a
+   form laid over it. */
+.po-doc input, .po-doc textarea {
+  border: none; background: transparent; font: inherit; color: inherit;
+  width: 100%; padding: 2px 4px; border-radius: 3px; resize: vertical;
+}
+.po-doc input::placeholder, .po-doc textarea::placeholder { color: #8a8a8a; font-style: italic; opacity: 1; }
+.po-doc input:hover, .po-doc textarea:hover { background: rgba(31, 56, 100, 0.06); }
+.po-doc input:focus, .po-doc textarea:focus { outline: 1.5px dashed var(--po-navy); background: #fff; }
+.po-doc input[type="number"] { text-align: right; }
+.po-doc input[type="date"] { min-width: 130px; }
+.po-doc-company-name { padding: 8px; }
+.po-doc-address-box textarea { min-height: 64px; }
+.po-doc-items-table input, .po-doc-terms-table input { padding: 6px 4px; }
+.po-doc-totals-table input[type="number"] { width: 60px; display: inline-block; margin: 0 2px; }
+.po-doc-items-table .remove-row-btn, .po-doc-terms-table .remove-row-btn {
+  background: none; border: none; color: var(--po-line); opacity: 0.55; cursor: pointer; padding: 4px;
+}
+.po-doc-items-table .remove-row-btn:hover, .po-doc-terms-table .remove-row-btn:hover { opacity: 1; color: #b91c1c; }
+.po-doc-items-table td, .po-doc-terms-table td { vertical-align: middle; }
+.po-doc-error { color: #b91c1c; font-size: 12px; font-weight: 600; margin: -6px 0 10px; }
+
+@media print {
+  body * { visibility: hidden; }
+  #poPreviewBody, #poPreviewBody * { visibility: visible; }
+  #poPreviewBody { position: absolute; top: 0; left: 0; width: 100%; padding: 0; }
+  .po-doc { border-width: 2px; }
+}

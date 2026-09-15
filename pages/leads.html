@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads — CRM</title>
+<script>(function(){try{var t=localStorage.getItem('crm_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<script>window.PAGE = { key: "leads", title: "Leads", breadcrumb: ["Main"] };</script>
+
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-area">
+    <header class="topbar" id="topbar"></header>
+
+    <main class="page-content" id="pageContent">
+      <div class="page-header">
+        <div>
+          <h1 id="pageTitleText">Leads</h1>
+          <p id="pageSubText">Manage and track every lead across your sales pipeline.</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-secondary" id="importLeadsBtn" data-icon="upload">Import Leads</button>
+          <button class="btn btn-secondary" id="exportLeadsBtn" data-icon="download">Export</button>
+          <button class="btn btn-primary" id="addLeadBtn" data-icon="plus">Add Lead</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-toolbar" style="flex-direction:column;align-items:stretch;">
+          <div class="filter-bar" style="margin-bottom:0;">
+            <div class="search-box" id="leadsSearchBox" data-icon="search">
+              <input type="text" id="searchInput" placeholder="Search by name, company, email or ID...">
+            </div>
+            <select class="select-field" id="statusFilter"></select>
+            <select class="select-field" id="leadTypeFilter"></select>
+            <span id="assignedFilterWrap"><select class="select-field" id="assignedFilter"></select></span>
+            <select class="select-field" id="priorityFilter"></select>
+            <input type="date" class="input" style="width:150px;" id="dateFromFilter" title="Created from">
+            <input type="date" class="input" style="width:150px;" id="dateToFilter" title="Created to">
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th class="sortable" data-sort="name">Name<span class="sort-icon" data-icon="chevronDown"></span></th>
+                <th>Company</th><th>Phone</th><th>Email</th><th>Assigned To</th>
+                <th class="sortable" data-sort="status">Status<span class="sort-icon" data-icon="chevronDown"></span></th>
+                <th>Next Follow-up</th>
+                <th class="sortable" data-sort="created">Created<span class="sort-icon" data-icon="chevronDown"></span></th>
+                <th class="cell-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-bar">
+          <span class="text-faint fs-sm" id="leadsCount"></span>
+          <div class="pagination" id="leadsPagination"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/icons.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/shared-modals.js"></script>
+<script src="../js/leads.js"></script>
+</body>
+</html>
